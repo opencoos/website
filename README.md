@@ -1,5 +1,7 @@
 # OpenCOOS — website
 
+Live at [opencoos.org](https://opencoos.org).
+
 Website for **OpenCOOS**, the open initiative maintaining **COOS** (Common Ownership Operating Schema): an open, vendor-neutral data model for shared-ownership communities, starting with BC strata corporations. OpenCOOS was founded by ManageStrata.
 
 Status: early development. Specification version `0.1.0-draft` (unreleased).

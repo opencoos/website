@@ -12,8 +12,7 @@ export const site = {
   audience: "For strata and condo communities across Canada",
   description:
     "OpenCOOS is a proudly Canadian open initiative maintaining COOS, the Common Ownership Operating Schema: an open data model for strata and condominium communities across Canada.",
-  // No production domain has been chosen yet; set NEXT_PUBLIC_SITE_URL before deploying.
-  url: (optional(process.env.NEXT_PUBLIC_SITE_URL) ?? "http://localhost:3000").replace(/\/$/, ""),
+  url: (optional(process.env.NEXT_PUBLIC_SITE_URL) ?? "https://opencoos.org").replace(/\/$/, ""),
   links: {
     specificationRepo: optional(process.env.NEXT_PUBLIC_SPEC_REPO_URL) ?? "https://github.com/opencoos/spec",
     websiteRepo: optional(process.env.NEXT_PUBLIC_WEBSITE_REPO_URL) ?? "https://github.com/opencoos/website",
