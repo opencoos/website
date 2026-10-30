@@ -18,7 +18,7 @@ export const site = {
     specificationRepo: optional(process.env.NEXT_PUBLIC_SPEC_REPO_URL) ?? "https://github.com/opencoos/spec",
     websiteRepo: optional(process.env.NEXT_PUBLIC_WEBSITE_REPO_URL) ?? "https://github.com/opencoos/website",
     issues: optional(process.env.NEXT_PUBLIC_ISSUES_URL) ?? "https://github.com/opencoos/spec/issues",
-    discussions: optional(process.env.NEXT_PUBLIC_DISCUSSIONS_URL),
+    discussions: optional(process.env.NEXT_PUBLIC_DISCUSSIONS_URL) ?? "https://github.com/opencoos/spec/discussions",
     contributing: optional(process.env.NEXT_PUBLIC_CONTRIBUTING_URL) ?? "https://github.com/opencoos/.github/blob/main/CONTRIBUTING.md",
     contactEmail: optional(process.env.NEXT_PUBLIC_CONTACT_EMAIL),
   },
