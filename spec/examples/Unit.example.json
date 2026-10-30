@@ -1,0 +1,13 @@
+{
+  "id": "unit-0305",
+  "strataLotId": "sl-0012",
+  "unitNumber": "305",
+  "address": {
+    "unitDesignator": "305",
+    "streetAddress": "100 Example Street",
+    "locality": "Vancouver",
+    "region": "BC",
+    "postalCode": "V5K 0A1",
+    "country": "CA"
+  }
+}

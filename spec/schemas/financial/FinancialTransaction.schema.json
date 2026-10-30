@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:coos:schema:FinancialTransaction",
+  "title": "FinancialTransaction",
+  "description": "A single receipt, disbursement, transfer or adjustment affecting a fund.",
+  "type": "object",
+  "x-domain": "financial",
+  "x-status": "experimental",
+  "x-since": "0.1.0-draft",
+  "x-relationships": [
+    {
+      "field": "strataCorporationId",
+      "target": "StrataCorporation",
+      "cardinality": "one",
+      "required": true
+    },
+    {
+      "field": "fundId",
+      "target": "Fund",
+      "cardinality": "one",
+      "required": true
+    },
+    {
+      "field": "strataLotId",
+      "target": "StrataLot",
+      "cardinality": "one",
+      "required": false
+    },
+    {
+      "field": "counterpartyOrganizationId",
+      "target": "Organization",
+      "cardinality": "one",
+      "required": false
+    },
+    {
+      "field": "levyId",
+      "target": "Levy",
+      "cardinality": "one",
+      "required": false
+    },
+    {
+      "field": "documentIds",
+      "target": "Document",
+      "cardinality": "many",
+      "required": false
+    }
+  ],
+  "x-validationRules": [
+    "Disbursements should have a negative amount and receipts a positive amount."
+  ],
+  "required": [
+    "id",
+    "strataCorporationId",
+    "fundId",
+    "transactionDate",
+    "transactionType",
+    "amount"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Stable identifier of this FinancialTransaction record."
+    },
+    "strataCorporationId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "The strata corporation this record belongs to.",
+      "x-references": "StrataCorporation"
+    },
+    "fundId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Fund affected.",
+      "x-references": "Fund"
+    },
+    "transactionDate": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "Date of the transaction."
+    },
+    "transactionType": {
+      "type": "string",
+      "description": "Kind of transaction.",
+      "enum": [
+        "receipt",
+        "disbursement",
+        "transfer",
+        "adjustment"
+      ],
+      "x-enumDescriptions": {
+        "receipt": "Money received.",
+        "disbursement": "Money paid out.",
+        "transfer": "Transfer between funds.",
+        "adjustment": "Accounting adjustment."
+      }
+    },
+    "amount": {
+      "$ref": "urn:coos:schema:common#/$defs/Money",
+      "description": "Amount. Positive values increase the fund; negative values decrease it."
+    },
+    "category": {
+      "type": "string",
+      "description": "Category label (for example \"Insurance\").",
+      "maxLength": 120
+    },
+    "description": {
+      "type": "string",
+      "description": "Description or memo.",
+      "maxLength": 1000
+    },
+    "strataLotId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Strata lot the transaction relates to, if any.",
+      "x-references": "StrataLot"
+    },
+    "counterpartyOrganizationId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Organization paid or paying, if any.",
+      "x-references": "Organization"
+    },
+    "levyId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Levy the transaction relates to, if any.",
+      "x-references": "Levy"
+    },
+    "documentIds": {
+      "type": "array",
+      "description": "Supporting documents such as invoices.",
+      "items": {
+        "$ref": "urn:coos:schema:common#/$defs/Identifier",
+        "x-references": "Document"
+      },
+      "uniqueItems": true
+    },
+    "extensions": {
+      "$ref": "urn:coos:schema:common#/$defs/Extensions",
+      "description": "Implementation-specific data, namespaced by reverse domain."
+    }
+  }
+}

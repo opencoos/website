@@ -1,0 +1,70 @@
+export const metadata = {
+  title: "Conventions and naming",
+  description: "Data model and naming conventions for the Common Ownership Operating Schema: identifiers, casing, dates, money, addresses, enumerations and extensions.",
+  alternates: { canonical: "/docs/conventions" },
+};
+
+# Conventions and naming
+
+These conventions apply to every entity. They are part of the draft and open for review.
+
+## Naming
+
+| Element | Convention | Example |
+| --- | --- | --- |
+| Entity names | PascalCase, singular | `StrataLot`, `GeneralMeeting` |
+| Field names | lowerCamelCase | `unitEntitlement`, `fiscalYearEnd` |
+| Enumeration values | lowerCamelCase | `contingencyReserve`, `threeQuarter` |
+| Reference fields | target name + `Id` / `Ids` | `strataLotId`, `documentIds` |
+
+This first draft uses BC strata terminology where an established term exists (for example *strata lot*, *unit entitlement*, *contingency reserve fund*). Ontario and Alberta condominium equivalents (*unit*, *proportion of common interest* or *unit factor*, *reserve fund*) are listed in the [terminology crosswalk](/standard/jurisdictions). How entities should be named across provinces is an open proposal. Abbreviations are avoided in field names; `CRF` appears only in descriptions.
+
+## Identifiers
+
+- Every record has an `id` of type [`Identifier`](/standard/shared-definitions#Identifier): an opaque string, 1–128 characters of `A–Z a–z 0–9 . _ : -`.
+- Identifiers are assigned by the system that holds the record and must be stable over time.
+- Identifiers carry no meaning. Real-world identifiers such as a strata plan number or PID are separate fields.
+
+## Dates and times
+
+- Calendar dates use [`Date`](/standard/shared-definitions#Date): `YYYY-MM-DD`.
+- Moments in time use [`DateTime`](/standard/shared-definitions#DateTime) with a UTC offset: `2026-03-14T19:00:00-07:00`.
+- Recurring dates without a year, such as fiscal year end, use `MM-DD`.
+
+## Money
+
+[`Money`](/standard/shared-definitions#Money) is an object with a decimal **string** amount and an ISO 4217 currency, to avoid floating-point rounding:
+
+```json
+{ "amount": "1250.00", "currency": "CAD" }
+```
+
+## Addresses
+
+[`Address`](/standard/shared-definitions#Address) uses Canadian components: `unitDesignator`, `streetAddress`, `locality`, `region`, `postalCode`, `country`.
+
+## Required vs. optional
+
+Only fields essential to identify and interpret a record are required. Omit unknown optional fields rather than sending `null` or empty strings.
+
+## Closed objects and extensions
+
+Entity objects are closed (`additionalProperties: false`) so that typos and undocumented fields are caught. Implementation-specific data goes in `extensions`, keyed by a reverse-domain namespace you control:
+
+```json
+{
+  "id": "sl-0012",
+  "strataCorporationId": "sc-0001",
+  "lotNumber": 12,
+  "unitEntitlement": 100,
+  "extensions": {
+    "com.example.app": { "legacyAccountCode": "A-12" }
+  }
+}
+```
+
+Consumers must ignore extensions they do not understand.
+
+## Privacy
+
+The standard defines structures, not disclosures. Personal fields such as `email` and `phone` are always optional, and exchanges should include only the information the recipient is entitled to receive. The `accessLevel` of a `Document` describes intent; it does not grant access.

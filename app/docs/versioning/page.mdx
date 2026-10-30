@@ -1,0 +1,38 @@
+export const metadata = {
+  title: "Versioning and compatibility",
+  description: "Versioning, backward compatibility and deprecation policy for the Common Ownership Operating Schema.",
+  alternates: { canonical: "/docs/versioning" },
+};
+
+# Versioning and compatibility
+
+This policy is itself a draft and will be confirmed with the first release.
+
+## Version numbers
+
+Releases use [semantic versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
+
+| Change | Version bump | Examples |
+| --- | --- | --- |
+| Breaking | Major | Removing or renaming a field, making an optional field required, removing an enumeration value, tightening a pattern |
+| Additive | Minor | New entity, new optional field, new enumeration value, new domain |
+| Editorial | Patch | Clarified descriptions, fixed examples, documentation |
+
+**Before 1.0.0**, any minor release may contain breaking changes, and they will be listed in the changelog. Working drafts carry a `-draft` suffix (for example `0.1.0-draft`) and may change at any time.
+
+## Backward compatibility principles
+
+- **Consumers must ignore** extension namespaces they don't recognise.
+- **Consumers should tolerate** enumeration values added in later minor versions, for example by treating unknown values as `other` or unknown.
+- **Producers should not** send fields that are not defined in the version they declare.
+- Entity and field names, once stable, are not reused with a different meaning.
+
+## Deprecation
+
+1. A field or entity is marked <StatusBadge status="deprecated" /> in a minor release, with the replacement and migration notes in the changelog.
+2. It remains valid for at least one further minor release.
+3. It is removed only in a major release.
+
+## Stable URLs
+
+Each version's schemas are published at `/spec/{version}/` and never change after publication. Fixes are released as new versions.

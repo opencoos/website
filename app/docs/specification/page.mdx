@@ -1,0 +1,66 @@
+import { SpecVersion } from "@/components/spec/spec-snippets";
+
+export const metadata = {
+  title: "Specification overview",
+  description: "Structure of the Common Ownership Operating Schema specification: domains, entities, shared definitions, statuses and the specification source repository.",
+  alternates: { canonical: "/docs/specification" },
+};
+
+# Specification overview
+
+The specification is a set of versioned, machine-readable files. The website renders documentation from those files; it does not define the standard itself.
+
+## Building blocks
+
+| Concept | Description |
+| --- | --- |
+| Domain | A group of related entities, such as Governance or Financial Management. |
+| Entity | One kind of record, such as `Resolution`. Defined by one JSON Schema. |
+| Field | A property of an entity with a type, description, constraints, and required or optional flag. |
+| Shared definition | Reusable type such as `Money`, `Address` or `Identifier`. |
+| Controlled vocabulary | A fixed list of values for a field, each with a definition. |
+| Relationship | A field holding the identifier of another entity. |
+
+## Statuses
+
+Every entity carries an `x-status`:
+
+- <StatusBadge status="stable" /> — part of a published release. **No entity is stable yet.**
+- <StatusBadge status="proposed" /> — drafted and open for review.
+- <StatusBadge status="experimental" /> — early draft that needs implementation feedback.
+- <StatusBadge status="planned" /> — identified for future work; no schema exists.
+- <StatusBadge status="deprecated" /> — scheduled for removal in a future major version.
+
+## Specification source layout
+
+The specification source is kept separate from the website code so that it can live in its own repository:
+
+```text
+spec/
+├── spec.json                 # name, version, status, domains
+├── changelog.json            # releases and open proposals
+├── domains/                  # purpose, scope, planned entities, open issues
+│   └── core.json …
+├── schemas/
+│   ├── common.schema.json    # shared definitions
+│   └── core/StrataLot.schema.json …
+└── examples/
+    └── StrataLot.example.json …
+```
+
+The current version is <SpecVersion />. The website reads the specification from `spec/` by default, or from the directory named in the `SPEC_DIR` environment variable, so a separately checked-out specification repository can be connected without code changes.
+
+## Schema extensions to JSON Schema
+
+Entity schemas are standard JSON Schema 2020-12 with a few annotation keywords. Validators ignore them; tooling and documentation use them.
+
+| Keyword | Purpose |
+| --- | --- |
+| `x-domain` | Domain the entity belongs to. |
+| `x-status` | Lifecycle status (see above). |
+| `x-since` | Version in which the entity first appeared. |
+| `x-relationships` | Relationships derived from reference fields. |
+| `x-references` | On a field: the entity whose identifier it holds. |
+| `x-enumDescriptions` | Definitions of each value in a controlled vocabulary. |
+| `x-validationRules` | Cross-field rules not expressible in JSON Schema. |
+| `x-legalReviewNotes` | Terminology or legal points that need review before release. |

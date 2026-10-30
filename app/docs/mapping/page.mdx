@@ -1,0 +1,42 @@
+export const metadata = {
+  title: "Migration and mapping",
+  description: "How to map an existing strata data model to the Common Ownership Operating Schema and migrate data between platforms.",
+  alternates: { canonical: "/docs/mapping" },
+};
+
+# Migration and mapping
+
+Most implementers will **map** at their system boundary rather than change their internal database. Your schema can stay as it is; you translate to and from the standard when data crosses into or out of your system.
+
+## Mapping process
+
+1. **Inventory.** List the record types you hold that correspond to entities in the standard. Start with the core: strata corporation, strata lots, people and ownership.
+2. **Field mapping.** For each entity, map your columns to standard fields. Record transformations such as date formats, money as decimal strings and enumeration values.
+3. **Identifiers.** Decide how you will produce stable `id` values — usually your existing primary keys, converted to strings.
+4. **Vocabularies.** Map your status and type codes to the standard's controlled vocabularies. Where nothing fits, use the closest value plus detail in `extensions`, and tell us — that's a gap in the standard.
+5. **Validate.** Validate exported records against the schemas.
+6. **Round-trip test.** Import what you export and compare, to find lossy mappings.
+
+## Example mapping
+
+A hypothetical legacy table and its mapping to `StrataLot`:
+
+| Legacy column | Standard field | Transformation |
+| --- | --- | --- |
+| `lot_id` (int) | `id` | Convert to string, for example `"sl-" + lot_id` |
+| `corp_id` | `strataCorporationId` | Same identifier scheme as the corporation export |
+| `sl_no` | `lotNumber` | Integer |
+| `pid` (`"000000012"`) | `parcelIdentifier` | Insert hyphens: `000-000-012` |
+| `ue` | `unitEntitlement` | Number |
+| `type` (`"R"`/`"C"`) | `usage` | `R` → `residential`, `C` → `nonResidential` |
+| `unit_no` | `Unit.unitNumber` | Moves to a separate `Unit` record |
+
+## Migrating between platforms
+
+When moving a strata corporation from one platform to another, export in dependency order so references can be resolved on import: StrataCorporation → StrataPlan → Building → StrataLot → Unit → Person / Organization → OwnershipInterest → governance, financial, maintenance and document records.
+
+Moving data between platforms also involves consent, contracts and records obligations that are outside the scope of a data standard.
+
+## Migrating between versions of the standard
+
+Each release in the [changelog](/changelog) includes migration instructions for any changed or deprecated fields. See [Versioning and compatibility](/docs/versioning).

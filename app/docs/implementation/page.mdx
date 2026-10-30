@@ -1,0 +1,58 @@
+import { ExampleFor } from "@/components/spec/spec-snippets";
+
+export const metadata = {
+  title: "Implementation examples",
+  description: "Worked examples and adoption guidance for implementing the draft Canadian strata and condo data standard in your product.",
+  alternates: { canonical: "/docs/implementation" },
+};
+
+# Implementation examples
+
+These examples show how records from different domains fit together. All data is fictional.
+
+## A strata corporation and its plan
+
+<ExampleFor entity="StrataCorporation" />
+
+<ExampleFor entity="StrataPlan" />
+
+## A general meeting and a resolution
+
+The resolution refers to the meeting through `meetingType` and `meetingId`:
+
+<ExampleFor entity="GeneralMeeting" />
+
+<ExampleFor entity="Resolution" />
+
+## A maintenance request and its work order
+
+<ExampleFor entity="MaintenanceRequest" />
+
+<ExampleFor entity="WorkOrder" />
+
+## Type definitions in TypeScript
+
+You can generate types from the schemas with any JSON Schema-to-TypeScript tool, or write them by hand. A hand-written equivalent of `StrataLot` looks like this:
+
+```ts
+type Identifier = string;
+
+interface StrataLot {
+  id: Identifier;
+  strataCorporationId: Identifier;
+  lotNumber: number;
+  unitEntitlement: number;
+  parcelIdentifier?: string;          // "123-456-789"
+  usage?: "residential" | "nonResidential";
+  areaSquareMetres?: number;
+  buildingId?: Identifier;
+  extensions?: Record<string, Record<string, unknown>>;
+}
+```
+
+## Adopting the standard
+
+1. Implement export of the core entities and validate the output.
+2. Publish which entities and which specification version you support.
+3. Avoid calling your product "conformant" or "certified" — no conformance program exists yet. "Implements draft 0.1.0 of COOS for these entities" is accurate.
+4. Share what didn't fit through the [contribution process](/contribute).

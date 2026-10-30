@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:coos:schema:CouncilMeeting",
+  "title": "CouncilMeeting",
+  "description": "A meeting of the strata council.",
+  "type": "object",
+  "x-domain": "governance",
+  "x-status": "proposed",
+  "x-since": "0.1.0-draft",
+  "x-relationships": [
+    {
+      "field": "councilId",
+      "target": "StrataCouncil",
+      "cardinality": "one",
+      "required": true
+    },
+    {
+      "field": "minutesDocumentId",
+      "target": "Document",
+      "cardinality": "one",
+      "required": false
+    }
+  ],
+  "x-validationRules": [],
+  "required": [
+    "id",
+    "councilId",
+    "scheduledStart",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Stable identifier of this CouncilMeeting record."
+    },
+    "councilId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "The council holding the meeting.",
+      "x-references": "StrataCouncil"
+    },
+    "scheduledStart": {
+      "$ref": "urn:coos:schema:common#/$defs/DateTime",
+      "description": "Scheduled start date and time."
+    },
+    "format": {
+      "type": "string",
+      "description": "How the meeting is held.",
+      "enum": [
+        "inPerson",
+        "electronic",
+        "hybrid"
+      ],
+      "x-enumDescriptions": {
+        "inPerson": "In person only.",
+        "electronic": "By telephone or other electronic means only.",
+        "hybrid": "In person with electronic attendance available."
+      }
+    },
+    "location": {
+      "type": "string",
+      "description": "Location or electronic attendance details.",
+      "maxLength": 500
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the meeting.",
+      "enum": [
+        "scheduled",
+        "held",
+        "adjourned",
+        "cancelled"
+      ],
+      "x-enumDescriptions": {
+        "scheduled": "Notice issued or planned; not yet held.",
+        "held": "The meeting took place.",
+        "adjourned": "The meeting was adjourned.",
+        "cancelled": "The meeting was cancelled."
+      }
+    },
+    "minutesDocumentId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Minutes of the meeting.",
+      "x-references": "Document"
+    },
+    "extensions": {
+      "$ref": "urn:coos:schema:common#/$defs/Extensions",
+      "description": "Implementation-specific data, namespaced by reverse domain."
+    }
+  }
+}

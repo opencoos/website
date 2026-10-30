@@ -1,0 +1,43 @@
+export const metadata = {
+  title: "Technical FAQ",
+  description: "Frequently asked technical questions about implementing the draft Common Ownership Operating Schema for Canadian strata and condo data.",
+  alternates: { canonical: "/docs/faq" },
+};
+
+# Technical FAQ
+
+### Do I have to change my database?
+
+No. Most implementers map at their system boundary. See [Migration and mapping](/docs/mapping).
+
+### Why JSON Schema?
+
+It is widely supported, language-neutral and can validate data directly. Types for most programming languages can be generated from it.
+
+### Why are amounts strings?
+
+Decimal strings such as `"1250.00"` avoid floating-point rounding errors. Parse them with a decimal type in your language.
+
+### Why is `additionalProperties` false?
+
+Closed objects catch typos and undocumented fields. Put product-specific data in `extensions`.
+
+### Why are unit and strata lot separate?
+
+The unit number people use in an address often differs from the strata lot number on the plan, and some strata lots have no unit address. Keeping them separate avoids mixing the legal and civic identifiers.
+
+### How do I represent something the standard doesn't cover?
+
+Use `extensions` with your reverse-domain namespace, and open an issue describing the gap so it can be considered for the standard.
+
+### Is there an official SDK, validator or API?
+
+Not yet. You can use any JSON Schema 2020-12 validator today. See [Validation](/docs/validation).
+
+### Does the standard work for condos outside British Columbia?
+
+That is the intent. The first working draft is modelled on BC strata, so some entity names use BC terms. Ontario and Alberta condominium terminology is mapped in the [jurisdictions crosswalk](/standard/jurisdictions), and adding those jurisdictions is the next priority. How entities should be named across provinces is an open proposal.
+
+### What licence applies to the specification?
+
+A licence has not been chosen yet. It will be published with the specification repository before the first release.

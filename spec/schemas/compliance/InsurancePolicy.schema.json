@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:coos:schema:InsurancePolicy",
+  "title": "InsurancePolicy",
+  "description": "An insurance policy held by the strata corporation, with its coverages, limits and deductibles.",
+  "type": "object",
+  "x-domain": "compliance",
+  "x-status": "experimental",
+  "x-since": "0.1.0-draft",
+  "x-relationships": [
+    {
+      "field": "strataCorporationId",
+      "target": "StrataCorporation",
+      "cardinality": "one",
+      "required": true
+    },
+    {
+      "field": "insurerOrganizationId",
+      "target": "Organization",
+      "cardinality": "one",
+      "required": false
+    },
+    {
+      "field": "brokerOrganizationId",
+      "target": "Organization",
+      "cardinality": "one",
+      "required": false
+    },
+    {
+      "field": "documentIds",
+      "target": "Document",
+      "cardinality": "many",
+      "required": false
+    }
+  ],
+  "x-validationRules": [
+    "expiryDate must be after effectiveDate."
+  ],
+  "x-legalReviewNotes": [
+    "Statutory insurance requirements for strata corporations should be summarised only after legal review."
+  ],
+  "required": [
+    "id",
+    "strataCorporationId",
+    "effectiveDate",
+    "expiryDate"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Stable identifier of this InsurancePolicy record."
+    },
+    "strataCorporationId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "The strata corporation this record belongs to.",
+      "x-references": "StrataCorporation"
+    },
+    "policyNumber": {
+      "type": "string",
+      "description": "Policy number assigned by the insurer.",
+      "maxLength": 64
+    },
+    "insurerOrganizationId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Insurer.",
+      "x-references": "Organization"
+    },
+    "brokerOrganizationId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Broker, if any.",
+      "x-references": "Organization"
+    },
+    "effectiveDate": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "Start of the policy period."
+    },
+    "expiryDate": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "End of the policy period."
+    },
+    "coverages": {
+      "type": "array",
+      "description": "Coverages under the policy.",
+      "items": {
+        "type": "object",
+        "required": [
+          "coverageType"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "coverageType": {
+            "type": "string",
+            "description": "Type of coverage.",
+            "enum": [
+              "property",
+              "generalLiability",
+              "directorsAndOfficers",
+              "equipmentBreakdown",
+              "crime",
+              "other"
+            ],
+            "x-enumDescriptions": {
+              "property": "Property coverage for buildings and common assets.",
+              "generalLiability": "Third-party / general liability.",
+              "directorsAndOfficers": "Directors and officers liability for council members.",
+              "equipmentBreakdown": "Equipment breakdown.",
+              "crime": "Crime / fidelity.",
+              "other": "Other coverage."
+            }
+          },
+          "limit": {
+            "$ref": "urn:coos:schema:common#/$defs/Money",
+            "description": "Limit of insurance."
+          },
+          "deductible": {
+            "$ref": "urn:coos:schema:common#/$defs/Money",
+            "description": "Deductible."
+          },
+          "peril": {
+            "type": "string",
+            "description": "Peril the deductible applies to, if peril-specific (for example \"earthquake\", \"water damage\").",
+            "maxLength": 64
+          }
+        }
+      }
+    },
+    "documentIds": {
+      "type": "array",
+      "description": "Policy documents and certificates.",
+      "items": {
+        "$ref": "urn:coos:schema:common#/$defs/Identifier",
+        "x-references": "Document"
+      },
+      "uniqueItems": true
+    },
+    "extensions": {
+      "$ref": "urn:coos:schema:common#/$defs/Extensions",
+      "description": "Implementation-specific data, namespaced by reverse domain."
+    }
+  }
+}

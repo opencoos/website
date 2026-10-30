@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:coos:schema:CommonAsset",
+  "title": "CommonAsset",
+  "description": "A component or system the strata corporation maintains, such as a roof, elevator or boiler. Used for maintenance planning and depreciation reporting.",
+  "type": "object",
+  "x-domain": "maintenance",
+  "x-status": "experimental",
+  "x-since": "0.1.0-draft",
+  "x-relationships": [
+    {
+      "field": "strataCorporationId",
+      "target": "StrataCorporation",
+      "cardinality": "one",
+      "required": true
+    },
+    {
+      "field": "buildingId",
+      "target": "Building",
+      "cardinality": "one",
+      "required": false
+    }
+  ],
+  "x-validationRules": [],
+  "required": [
+    "id",
+    "strataCorporationId",
+    "name",
+    "category"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Stable identifier of this CommonAsset record."
+    },
+    "strataCorporationId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "The strata corporation this record belongs to.",
+      "x-references": "StrataCorporation"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the asset.",
+      "maxLength": 200
+    },
+    "category": {
+      "type": "string",
+      "description": "Asset category.",
+      "enum": [
+        "roofing",
+        "buildingEnvelope",
+        "structure",
+        "mechanical",
+        "plumbing",
+        "electrical",
+        "elevator",
+        "fireSafety",
+        "sitework",
+        "amenity",
+        "other"
+      ],
+      "x-enumDescriptions": {
+        "roofing": "Roofing.",
+        "buildingEnvelope": "Walls, windows, doors and other building envelope components.",
+        "structure": "Structural components.",
+        "mechanical": "Heating, ventilation and air conditioning.",
+        "plumbing": "Plumbing and drainage.",
+        "electrical": "Electrical systems.",
+        "elevator": "Elevators and lifts.",
+        "fireSafety": "Fire protection and life safety systems.",
+        "sitework": "Paving, landscaping and site services.",
+        "amenity": "Amenity spaces and equipment.",
+        "other": "Other."
+      }
+    },
+    "buildingId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Building the asset belongs to, if any.",
+      "x-references": "Building"
+    },
+    "location": {
+      "type": "string",
+      "description": "Where the asset is located.",
+      "maxLength": 500
+    },
+    "installedDate": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "Installation or last replacement date."
+    },
+    "expectedServiceLifeYears": {
+      "type": "integer",
+      "description": "Expected service life in years.",
+      "minimum": 0
+    },
+    "replacementCostEstimate": {
+      "$ref": "urn:coos:schema:common#/$defs/Money",
+      "description": "Estimated replacement cost."
+    },
+    "condition": {
+      "type": "string",
+      "description": "Last assessed condition.",
+      "enum": [
+        "good",
+        "fair",
+        "poor",
+        "critical",
+        "unknown"
+      ],
+      "x-enumDescriptions": {
+        "good": "Good.",
+        "fair": "Fair.",
+        "poor": "Poor.",
+        "critical": "Critical.",
+        "unknown": "Not assessed."
+      }
+    },
+    "extensions": {
+      "$ref": "urn:coos:schema:common#/$defs/Extensions",
+      "description": "Implementation-specific data, namespaced by reverse domain."
+    }
+  }
+}

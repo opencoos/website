@@ -1,0 +1,42 @@
+import { SpecVersion, ExampleFor } from "@/components/spec/spec-snippets";
+
+export const metadata = {
+  title: "Getting started",
+  description: "Start implementing the Common Ownership Operating Schema: what it is, what exists today, and how to use the draft JSON Schemas for Canadian strata and condo data.",
+  alternates: { canonical: "/docs" },
+};
+
+# Getting started
+
+The Common Ownership Operating Schema (COOS) describes how strata and condominium information should be named, structured and related so that different systems can exchange it consistently. This documentation is for developers and technical teams who want to evaluate or implement it.
+
+<Callout tone="warning" title="Early development">
+The current version is working draft <SpecVersion />. Every entity is <StatusBadge status="proposed" /> or <StatusBadge status="experimental" />. Expect breaking changes before 1.0.0, and do not treat draft definitions as final.
+</Callout>
+
+## What exists today
+
+- **Definitions** for 25 draft entities across six domains, browsable in the [Data Model Explorer](/data-model).
+- **JSON Schema (draft 2020-12) files** for every drafted entity, plus shared definitions. See [JSON Schema definitions](/docs/json-schema).
+- **Example payloads** for every entity, validated against their schemas whenever the website is built.
+- **A validation script** in the website source that compiles every schema and checks every example.
+
+## What does not exist yet
+
+There is no hosted API, SDK, package on a package registry, or conformance test suite. These may be developed later; this documentation will say so when they exist. The standard defines **data**, not an API — see [API interoperability](/docs/api-interoperability).
+
+## Quick start
+
+1. **Read the model.** Start with the [Core Strata Entities](/standard/core) — `StrataCorporation`, `StrataPlan`, `StrataLot` — which every other domain refers to.
+2. **Download the schemas.** Every schema is published at a version-stable URL listed on the [JSON Schema](/docs/json-schema) page.
+3. **Map one entity.** Pick one record type in your system and map it to the standard at your system boundary. See [Migration and mapping](/docs/mapping).
+4. **Validate.** Validate your exported JSON with any JSON Schema 2020-12 validator. See [Validation](/docs/validation).
+5. **Give feedback.** Tell us where the model didn't fit your data. See [Contribute](/contribute).
+
+## A first example
+
+Every record has an `id`, uses camelCase field names, and refers to other records by their identifiers:
+
+<ExampleFor entity="StrataLot" />
+
+`strataCorporationId` and `buildingId` reference other entities. `unitEntitlement` is the strata lot's share for apportioning common expenses.

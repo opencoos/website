@@ -1,0 +1,19 @@
+{
+  "id": "sc-0001",
+  "name": "The Owners, Strata Plan EPS0001",
+  "commonName": "Example Residences",
+  "strataPlanNumber": "EPS0001",
+  "strataPlanId": "sp-0001",
+  "jurisdiction": "BC",
+  "status": "active",
+  "establishedDate": "2015-06-30",
+  "fiscalYearEnd": "12-31",
+  "mailingAddress": {
+    "streetAddress": "100 Example Street",
+    "locality": "Vancouver",
+    "region": "BC",
+    "postalCode": "V5K 0A1",
+    "country": "CA"
+  },
+  "managementOrganizationId": "org-0001"
+}

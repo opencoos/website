@@ -1,0 +1,15 @@
+{
+  "id": "bldg-0001",
+  "strataCorporationId": "sc-0001",
+  "name": "Main building",
+  "address": {
+    "streetAddress": "100 Example Street",
+    "locality": "Vancouver",
+    "region": "BC",
+    "postalCode": "V5K 0A1",
+    "country": "CA"
+  },
+  "yearBuilt": 2015,
+  "storeys": 6,
+  "constructionType": "woodFrame"
+}

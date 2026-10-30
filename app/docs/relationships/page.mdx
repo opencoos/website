@@ -1,0 +1,37 @@
+import { RelationshipIndex } from "@/components/spec/spec-snippets";
+
+export const metadata = {
+  title: "Entity relationships",
+  description: "How entities in the draft strata data standard reference each other, generated from the JSON Schemas.",
+  alternates: { canonical: "/docs/relationships" },
+};
+
+# Entity relationships
+
+Entities refer to each other by identifier. A field such as `strataLotId` holds the `id` of a `StrataLot`; a field such as `documentIds` holds a list of identifiers.
+
+## Principles
+
+- **Reference, don't embed.** Records refer to other records by identifier rather than nesting them, so each record can be exchanged and updated independently.
+- **The strata corporation is the anchor.** Most records carry a `strataCorporationId`, which makes it easy to partition data by corporation.
+- **Child-to-parent direction.** References point from the more specific record to the more general one (a `CouncilMember` refers to its `StrataCouncil`, not the other way round).
+- **Polymorphic references are explicit.** Where a field can refer to more than one kind of entity, a companion field says which — for example `Resolution.meetingType` with `meetingId`, and `OwnershipInterest.partyType` with `partyId`.
+
+## Core shape
+
+```text
+StrataCorporation ─┬─ StrataPlan
+                   ├─ Building ── StrataLot ── Unit
+                   │               └─ OwnershipInterest ── Person | Organization
+                   ├─ StrataCouncil ── CouncilMember ── Person
+                   ├─ GeneralMeeting / CouncilMeeting ── Resolution ── VotingRecord
+                   ├─ Fund ── FinancialTransaction / Budget / Levy
+                   ├─ CommonAsset ── MaintenanceRequest ── WorkOrder
+                   └─ Document / InsurancePolicy
+```
+
+## All relationships
+
+Generated from `x-relationships` in the current schemas:
+
+<RelationshipIndex />

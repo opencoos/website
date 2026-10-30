@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:coos:schema:OwnershipInterest",
+  "title": "OwnershipInterest",
+  "description": "Links a person or organization to a strata lot as a registered owner for a period of time.",
+  "type": "object",
+  "x-domain": "core",
+  "x-status": "experimental",
+  "x-since": "0.1.0-draft",
+  "x-relationships": [
+    {
+      "field": "strataLotId",
+      "target": "StrataLot",
+      "cardinality": "one",
+      "required": true
+    }
+  ],
+  "x-validationRules": [
+    "endDate must be on or after startDate.",
+    "partyId must reference a Person when partyType is person, and an Organization otherwise."
+  ],
+  "x-legalReviewNotes": [
+    "Ownership is established by the Land Title register. Records in this standard are informational copies, not proof of title."
+  ],
+  "required": [
+    "id",
+    "strataLotId",
+    "partyType",
+    "partyId",
+    "startDate"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Stable identifier of this OwnershipInterest record."
+    },
+    "strataLotId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "The strata lot owned.",
+      "x-references": "StrataLot"
+    },
+    "partyType": {
+      "type": "string",
+      "description": "Kind of party that holds the interest.",
+      "enum": [
+        "person",
+        "organization"
+      ],
+      "x-enumDescriptions": {
+        "person": "A Person record.",
+        "organization": "An Organization record."
+      }
+    },
+    "partyId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Identifier of the Person or Organization, according to partyType."
+    },
+    "startDate": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "Date the ownership began (for example, registration date)."
+    },
+    "endDate": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "Date the ownership ended, if it has."
+    },
+    "extensions": {
+      "$ref": "urn:coos:schema:common#/$defs/Extensions",
+      "description": "Implementation-specific data, namespaced by reverse domain."
+    }
+  }
+}

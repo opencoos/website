@@ -1,0 +1,35 @@
+{
+  "id": "ins-2026",
+  "strataCorporationId": "sc-0001",
+  "policyNumber": "EX-123456",
+  "insurerOrganizationId": "org-0004",
+  "effectiveDate": "2026-02-01",
+  "expiryDate": "2027-02-01",
+  "coverages": [
+    {
+      "coverageType": "property",
+      "limit": {
+        "amount": "32000000.00",
+        "currency": "CAD"
+      }
+    },
+    {
+      "coverageType": "property",
+      "peril": "water damage",
+      "deductible": {
+        "amount": "50000.00",
+        "currency": "CAD"
+      }
+    },
+    {
+      "coverageType": "generalLiability",
+      "limit": {
+        "amount": "10000000.00",
+        "currency": "CAD"
+      }
+    }
+  ],
+  "documentIds": [
+    "doc-0301"
+  ]
+}

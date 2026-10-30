@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:coos:schema:Organization",
+  "title": "Organization",
+  "description": "A company or other organization involved with a strata corporation, such as a strata management company, contractor, or insurer.",
+  "type": "object",
+  "x-domain": "core",
+  "x-status": "proposed",
+  "x-since": "0.1.0-draft",
+  "x-relationships": [],
+  "x-validationRules": [],
+  "x-legalReviewNotes": [
+    "Decide whether licensing information (for example, strata management licences) should be modelled and how it is verified."
+  ],
+  "required": [
+    "id",
+    "name",
+    "organizationType"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Stable identifier of this Organization record."
+    },
+    "name": {
+      "type": "string",
+      "description": "Legal or operating name.",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "organizationType": {
+      "type": "string",
+      "description": "Primary role of the organization in relation to strata corporations.",
+      "enum": [
+        "strataManagement",
+        "contractor",
+        "insurer",
+        "insuranceBroker",
+        "financialInstitution",
+        "professionalServices",
+        "other"
+      ],
+      "x-enumDescriptions": {
+        "strataManagement": "Strata management company.",
+        "contractor": "Contractor or trade service provider.",
+        "insurer": "Insurance company.",
+        "insuranceBroker": "Insurance broker.",
+        "financialInstitution": "Bank or credit union.",
+        "professionalServices": "Accountant, lawyer, engineer, appraiser or similar professional.",
+        "other": "Any other kind of organization."
+      }
+    },
+    "website": {
+      "type": "string",
+      "description": "Public website URL.",
+      "format": "uri"
+    },
+    "email": {
+      "type": "string",
+      "description": "General contact email.",
+      "format": "email"
+    },
+    "phone": {
+      "type": "string",
+      "description": "General phone number in E.164 format.",
+      "pattern": "^\\+[1-9][0-9]{6,14}$"
+    },
+    "address": {
+      "$ref": "urn:coos:schema:common#/$defs/Address",
+      "description": "Business address."
+    },
+    "extensions": {
+      "$ref": "urn:coos:schema:common#/$defs/Extensions",
+      "description": "Implementation-specific data, namespaced by reverse domain."
+    }
+  }
+}

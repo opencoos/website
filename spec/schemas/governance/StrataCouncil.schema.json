@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:coos:schema:StrataCouncil",
+  "title": "StrataCouncil",
+  "description": "The council elected by the owners to exercise the powers and perform the duties of the strata corporation for a term.",
+  "type": "object",
+  "x-domain": "governance",
+  "x-status": "proposed",
+  "x-since": "0.1.0-draft",
+  "x-relationships": [
+    {
+      "field": "strataCorporationId",
+      "target": "StrataCorporation",
+      "cardinality": "one",
+      "required": true
+    },
+    {
+      "field": "electedAtMeetingId",
+      "target": "GeneralMeeting",
+      "cardinality": "one",
+      "required": false
+    }
+  ],
+  "x-validationRules": [
+    "termEndDate must be on or after termStartDate.",
+    "Terms of councils for one strata corporation should not overlap."
+  ],
+  "required": [
+    "id",
+    "strataCorporationId",
+    "termStartDate"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Stable identifier of this StrataCouncil record."
+    },
+    "strataCorporationId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "The strata corporation this record belongs to.",
+      "x-references": "StrataCorporation"
+    },
+    "termStartDate": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "Date the council's term began."
+    },
+    "termEndDate": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "Date the council's term ended, if it has."
+    },
+    "electedAtMeetingId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "General meeting at which the council was elected.",
+      "x-references": "GeneralMeeting"
+    },
+    "extensions": {
+      "$ref": "urn:coos:schema:common#/$defs/Extensions",
+      "description": "Implementation-specific data, namespaced by reverse domain."
+    }
+  }
+}

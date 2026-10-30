@@ -1,0 +1,71 @@
+export const metadata = {
+  title: "Validation",
+  description: "Validate strata data against the draft JSON Schemas with any JSON Schema 2020-12 validator, with examples in TypeScript.",
+  alternates: { canonical: "/docs/validation" },
+};
+
+# Validation
+
+Validation happens in two layers:
+
+1. **Schema validation** — structure, types, required fields, formats, patterns and controlled vocabularies. Any JSON Schema 2020-12 validator can do this.
+2. **Rule validation** — cross-field and cross-record rules listed under *Validation rules* on each entity page (for example, `endDate` must be on or after `startDate`). These are documented but not yet enforced by published tooling.
+
+## Example: TypeScript with Ajv
+
+There is no official validator package. This example uses the open-source [Ajv](https://ajv.js.org/) library with schemas downloaded from the [JSON Schema](/docs/json-schema) page.
+
+```ts
+import Ajv2020 from "ajv/dist/2020";
+import addFormats from "ajv-formats";
+import common from "./schemas/common.schema.json";
+import strataLot from "./schemas/core/StrataLot.schema.json";
+
+// Annotation keywords used by the standard. strict mode needs them declared.
+const keywords = [
+  "x-domain", "x-status", "x-since", "x-relationships", "x-validationRules",
+  "x-legalReviewNotes", "x-references", "x-enumDescriptions",
+];
+
+const ajv = new Ajv2020({ allErrors: true });
+addFormats(ajv);
+keywords.forEach((k) => ajv.addKeyword(k));
+ajv.addSchema(common);
+
+const validate = ajv.compile(strataLot);
+
+const record = {
+  id: "sl-0012",
+  strataCorporationId: "sc-0001",
+  lotNumber: 12,
+  unitEntitlement: 100,
+  parcelIdentifier: "000000012",
+};
+
+if (!validate(record)) {
+  console.log(validate.errors);
+}
+```
+
+The record above fails because the PID is missing its hyphens (output abridged):
+
+```json
+[
+  {
+    "instancePath": "/parcelIdentifier",
+    "keyword": "pattern",
+    "message": "must match pattern \"^[0-9]{3}-[0-9]{3}-[0-9]{3}$\""
+  }
+]
+```
+
+## How this website validates the specification
+
+The website source includes `scripts/validate-spec.mjs`, which runs before every build. It:
+
+- compiles every schema in strict mode,
+- validates every example payload against its schema,
+- checks that every relationship points to a defined entity, and
+- checks that every domain has metadata.
+
+Run it locally with `npm run spec:validate`.

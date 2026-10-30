@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:coos:schema:VotingRecord",
+  "title": "VotingRecord",
+  "description": "Aggregate tally of votes on a resolution. Individual votes are intentionally not modelled in this draft.",
+  "type": "object",
+  "x-domain": "governance",
+  "x-status": "experimental",
+  "x-since": "0.1.0-draft",
+  "x-relationships": [
+    {
+      "field": "resolutionId",
+      "target": "Resolution",
+      "cardinality": "one",
+      "required": true
+    }
+  ],
+  "x-validationRules": [
+    "votesByProxy must not exceed votesFor + votesAgainst + abstentions."
+  ],
+  "required": [
+    "id",
+    "resolutionId",
+    "votesFor",
+    "votesAgainst"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Stable identifier of this VotingRecord record."
+    },
+    "resolutionId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Resolution the votes were cast on.",
+      "x-references": "Resolution"
+    },
+    "method": {
+      "type": "string",
+      "description": "How votes were cast.",
+      "enum": [
+        "showOfHands",
+        "secretBallot",
+        "rollCall",
+        "electronic"
+      ],
+      "x-enumDescriptions": {
+        "showOfHands": "Show of hands or voting cards.",
+        "secretBallot": "Secret ballot.",
+        "rollCall": "Roll call.",
+        "electronic": "Electronic voting."
+      }
+    },
+    "votesFor": {
+      "type": "integer",
+      "description": "Votes in favour.",
+      "minimum": 0
+    },
+    "votesAgainst": {
+      "type": "integer",
+      "description": "Votes against.",
+      "minimum": 0
+    },
+    "abstentions": {
+      "type": "integer",
+      "description": "Abstentions, if recorded.",
+      "minimum": 0
+    },
+    "votesByProxy": {
+      "type": "integer",
+      "description": "Number of votes cast by proxy included in the totals, if recorded.",
+      "minimum": 0
+    },
+    "extensions": {
+      "$ref": "urn:coos:schema:common#/$defs/Extensions",
+      "description": "Implementation-specific data, namespaced by reverse domain."
+    }
+  }
+}

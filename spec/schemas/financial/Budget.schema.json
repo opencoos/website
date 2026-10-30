@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:coos:schema:Budget",
+  "title": "Budget",
+  "description": "The annual budget for a fiscal year, including planned contributions to the operating fund and the contingency reserve fund.",
+  "type": "object",
+  "x-domain": "financial",
+  "x-status": "proposed",
+  "x-since": "0.1.0-draft",
+  "x-relationships": [
+    {
+      "field": "strataCorporationId",
+      "target": "StrataCorporation",
+      "cardinality": "one",
+      "required": true
+    },
+    {
+      "field": "approvedByResolutionId",
+      "target": "Resolution",
+      "cardinality": "one",
+      "required": false
+    }
+  ],
+  "x-validationRules": [
+    "fiscalYearEnd must be after fiscalYearStart.",
+    "approvedByResolutionId should be present when status is approved."
+  ],
+  "required": [
+    "id",
+    "strataCorporationId",
+    "fiscalYearStart",
+    "fiscalYearEnd",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Stable identifier of this Budget record."
+    },
+    "strataCorporationId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "The strata corporation this record belongs to.",
+      "x-references": "StrataCorporation"
+    },
+    "fiscalYearStart": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "First day of the fiscal year."
+    },
+    "fiscalYearEnd": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "Last day of the fiscal year."
+    },
+    "status": {
+      "type": "string",
+      "description": "Approval status.",
+      "enum": [
+        "draft",
+        "proposed",
+        "approved",
+        "superseded"
+      ],
+      "x-enumDescriptions": {
+        "draft": "Being prepared.",
+        "proposed": "Presented to owners for approval.",
+        "approved": "Approved by the owners.",
+        "superseded": "Replaced by an amended budget."
+      }
+    },
+    "approvedByResolutionId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Resolution approving the budget.",
+      "x-references": "Resolution"
+    },
+    "lineItems": {
+      "type": "array",
+      "description": "Budgeted income and expense lines.",
+      "items": {
+        "type": "object",
+        "required": [
+          "category",
+          "amount"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Category label used by the corporation (for example \"Insurance\"). A shared category vocabulary is an open proposal.",
+            "maxLength": 120
+          },
+          "kind": {
+            "type": "string",
+            "description": "Whether the line is income or expense.",
+            "enum": [
+              "income",
+              "expense"
+            ],
+            "x-enumDescriptions": {
+              "income": "Income.",
+              "expense": "Expense."
+            }
+          },
+          "fundId": {
+            "$ref": "urn:coos:schema:common#/$defs/Identifier",
+            "description": "Fund the line belongs to.",
+            "x-references": "Fund"
+          },
+          "amount": {
+            "$ref": "urn:coos:schema:common#/$defs/Money",
+            "description": "Budgeted amount for the year."
+          }
+        }
+      }
+    },
+    "extensions": {
+      "$ref": "urn:coos:schema:common#/$defs/Extensions",
+      "description": "Implementation-specific data, namespaced by reverse domain."
+    }
+  }
+}

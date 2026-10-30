@@ -1,0 +1,38 @@
+import { SchemaIndex, SchemaBaseUrl, SpecVersion } from "@/components/spec/spec-snippets";
+
+export const metadata = {
+  title: "JSON Schema definitions",
+  description: "Download the machine-readable JSON Schema (2020-12) definitions and example payloads for the draft Canadian strata and condo data standard.",
+  alternates: { canonical: "/docs/json-schema" },
+};
+
+# JSON Schema definitions
+
+Every drafted entity is defined by a JSON Schema (draft 2020-12) file. Shared types live in `common.schema.json`.
+
+## Stable URLs
+
+Files for each version are published under a URL that includes the version and does not change:
+
+<SchemaBaseUrl />
+
+For example, `schemas/core/StrataLot.schema.json` and `examples/StrataLot.example.json`. Working drafts like <SpecVersion /> are published the same way so they can be reviewed, but they are not releases.
+
+## Schema identifiers
+
+Each schema's `$id` is a URN, independent of where the file is hosted:
+
+```json
+{
+  "$id": "urn:coos:schema:StrataLot",
+  "properties": {
+    "strataCorporationId": { "$ref": "urn:coos:schema:common#/$defs/Identifier" }
+  }
+}
+```
+
+Load `common.schema.json` together with the entity schemas so that `$ref`s resolve. The version a schema belongs to is the version of the release you downloaded it from.
+
+## Files
+
+<SchemaIndex />

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:coos:schema:Building",
+  "title": "Building",
+  "description": "A physical building that forms part of a strata development. A strata corporation may include more than one building.",
+  "type": "object",
+  "x-domain": "core",
+  "x-status": "experimental",
+  "x-since": "0.1.0-draft",
+  "x-relationships": [
+    {
+      "field": "strataCorporationId",
+      "target": "StrataCorporation",
+      "cardinality": "one",
+      "required": true
+    }
+  ],
+  "x-validationRules": [
+    "yearBuilt must not be in the future."
+  ],
+  "required": [
+    "id",
+    "strataCorporationId",
+    "name"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Stable identifier of this Building record."
+    },
+    "strataCorporationId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "The strata corporation this record belongs to.",
+      "x-references": "StrataCorporation"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name or label used to identify the building (for example \"Building A\").",
+      "maxLength": 120
+    },
+    "address": {
+      "$ref": "urn:coos:schema:common#/$defs/Address",
+      "description": "Civic address of the building."
+    },
+    "yearBuilt": {
+      "type": "integer",
+      "description": "Year construction was completed.",
+      "minimum": 1800,
+      "maximum": 2100
+    },
+    "storeys": {
+      "type": "integer",
+      "description": "Number of storeys above grade.",
+      "minimum": 1
+    },
+    "constructionType": {
+      "type": "string",
+      "description": "Primary structural construction type.",
+      "enum": [
+        "woodFrame",
+        "concrete",
+        "steel",
+        "mixed",
+        "other"
+      ],
+      "x-enumDescriptions": {
+        "woodFrame": "Wood-frame construction.",
+        "concrete": "Concrete construction.",
+        "steel": "Steel construction.",
+        "mixed": "A combination of structural systems.",
+        "other": "Another construction type."
+      }
+    },
+    "extensions": {
+      "$ref": "urn:coos:schema:common#/$defs/Extensions",
+      "description": "Implementation-specific data, namespaced by reverse domain."
+    }
+  }
+}

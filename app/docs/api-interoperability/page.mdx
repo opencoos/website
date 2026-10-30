@@ -1,0 +1,41 @@
+export const metadata = {
+  title: "API interoperability",
+  description: "How the strata data standard relates to APIs and software products, and guidance for exchanging standard-shaped data over APIs and files.",
+  alternates: { canonical: "/docs/api-interoperability" },
+};
+
+# API interoperability
+
+## The standard is not an API
+
+COOS defines **what data looks like**, not how it is transported. There is no COOS API, and implementing the standard does not require running any particular service. Products that implement the standard — including ManageStrata.ca — have their own APIs, which are not part of the standard and are documented by those products.
+
+| | The data standard | An implementation's API |
+| --- | --- | --- |
+| Defines | Entities, fields, types, vocabularies, relationships | Endpoints, authentication, pagination, rate limits |
+| Owned by | The community, through [governance](/governance) | The product's vendor |
+| Versioned by | Specification releases | The vendor |
+
+## Guidance for APIs that exchange standard data
+
+These recommendations are informative, not requirements:
+
+- **Return standard-shaped bodies.** Resources should match the entity schema, so a `GET` of a strata lot returns a valid `StrataLot`.
+- **Declare the specification version.** Indicate which version the payload conforms to, for example in documentation or a response header such as `COOS-Version: 0.1.0-draft`. No header name has been standardised yet.
+- **Keep your own fields in `extensions`.** Don't add undeclared top-level fields; namespace them under your reverse domain.
+- **Use references, not embedding.** Return identifiers for related records; offer expansion as an API feature if needed.
+- **Respect privacy.** Return personal information only to callers entitled to receive it.
+
+## File-based exchange
+
+For migrations and bulk transfers, a simple, transport-independent shape is newline-delimited JSON (one record per line), one file per entity:
+
+```text
+export/
+├── StrataCorporation.ndjson
+├── StrataLot.ndjson
+├── Person.ndjson
+└── OwnershipInterest.ndjson
+```
+
+A standard packaging format (manifest, checksums, ordering) is an open topic for a future version.

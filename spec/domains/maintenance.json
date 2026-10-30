@@ -1,0 +1,17 @@
+{
+  "id": "maintenance",
+  "order": 4,
+  "name": "Maintenance and Assets",
+  "summary": "Common assets, maintenance requests and work orders.",
+  "purpose": "Allow maintenance platforms, contractors and management systems to share requests, work and asset information consistently.",
+  "inScope": ["Common assets and their condition", "Maintenance requests", "Work orders issued to contractors"],
+  "outOfScope": ["Contractor pricing and bidding workflows", "Determining who is responsible for a repair"],
+  "planned": [
+    { "name": "BuildingSystem", "description": "Grouping of assets into systems such as HVAC or fire protection." },
+    { "name": "Inspection", "description": "A scheduled or ad hoc inspection and its findings." },
+    { "name": "MaintenanceSchedule", "description": "Recurring maintenance tasks for an asset." }
+  ],
+  "openIssues": [
+    { "title": "Asset categories", "description": "Align CommonAsset.category with the component lists commonly used in depreciation reports." }
+  ]
+}

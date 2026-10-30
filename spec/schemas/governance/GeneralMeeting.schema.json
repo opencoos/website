@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:coos:schema:GeneralMeeting",
+  "title": "GeneralMeeting",
+  "description": "A meeting of the owners: an annual general meeting or a special general meeting.",
+  "type": "object",
+  "x-domain": "governance",
+  "x-status": "proposed",
+  "x-since": "0.1.0-draft",
+  "x-relationships": [
+    {
+      "field": "strataCorporationId",
+      "target": "StrataCorporation",
+      "cardinality": "one",
+      "required": true
+    },
+    {
+      "field": "minutesDocumentId",
+      "target": "Document",
+      "cardinality": "one",
+      "required": false
+    }
+  ],
+  "x-validationRules": [
+    "noticeDate must be before scheduledStart.",
+    "quorumAchieved should be present when status is held."
+  ],
+  "x-legalReviewNotes": [
+    "Notice periods and quorum rules are set by legislation and bylaws. The standard records facts; it does not evaluate compliance."
+  ],
+  "required": [
+    "id",
+    "strataCorporationId",
+    "meetingType",
+    "scheduledStart",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Stable identifier of this GeneralMeeting record."
+    },
+    "strataCorporationId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "The strata corporation this record belongs to.",
+      "x-references": "StrataCorporation"
+    },
+    "meetingType": {
+      "type": "string",
+      "description": "Type of general meeting.",
+      "enum": [
+        "annual",
+        "special"
+      ],
+      "x-enumDescriptions": {
+        "annual": "Annual general meeting (AGM).",
+        "special": "Special general meeting (SGM)."
+      }
+    },
+    "scheduledStart": {
+      "$ref": "urn:coos:schema:common#/$defs/DateTime",
+      "description": "Scheduled start date and time."
+    },
+    "format": {
+      "type": "string",
+      "description": "How the meeting is held.",
+      "enum": [
+        "inPerson",
+        "electronic",
+        "hybrid"
+      ],
+      "x-enumDescriptions": {
+        "inPerson": "In person only.",
+        "electronic": "By telephone or other electronic means only.",
+        "hybrid": "In person with electronic attendance available."
+      }
+    },
+    "location": {
+      "type": "string",
+      "description": "Location or electronic attendance details, as given in the notice.",
+      "maxLength": 500
+    },
+    "noticeDate": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "Date notice of the meeting was given."
+    },
+    "quorumAchieved": {
+      "type": "boolean",
+      "description": "Whether quorum was achieved."
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the meeting.",
+      "enum": [
+        "scheduled",
+        "held",
+        "adjourned",
+        "cancelled"
+      ],
+      "x-enumDescriptions": {
+        "scheduled": "Notice issued or planned; not yet held.",
+        "held": "The meeting took place.",
+        "adjourned": "The meeting was adjourned.",
+        "cancelled": "The meeting was cancelled."
+      }
+    },
+    "minutesDocumentId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Approved or draft minutes of the meeting.",
+      "x-references": "Document"
+    },
+    "extensions": {
+      "$ref": "urn:coos:schema:common#/$defs/Extensions",
+      "description": "Implementation-specific data, namespaced by reverse domain."
+    }
+  }
+}

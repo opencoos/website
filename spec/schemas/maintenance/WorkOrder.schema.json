@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:coos:schema:WorkOrder",
+  "title": "WorkOrder",
+  "description": "An instruction to a contractor or service provider to carry out defined work.",
+  "type": "object",
+  "x-domain": "maintenance",
+  "x-status": "experimental",
+  "x-since": "0.1.0-draft",
+  "x-relationships": [
+    {
+      "field": "strataCorporationId",
+      "target": "StrataCorporation",
+      "cardinality": "one",
+      "required": true
+    },
+    {
+      "field": "maintenanceRequestIds",
+      "target": "MaintenanceRequest",
+      "cardinality": "many",
+      "required": false
+    },
+    {
+      "field": "contractorOrganizationId",
+      "target": "Organization",
+      "cardinality": "one",
+      "required": false
+    }
+  ],
+  "x-validationRules": [
+    "completedDate must be on or after issuedDate.",
+    "completedDate is expected when status is completed."
+  ],
+  "required": [
+    "id",
+    "strataCorporationId",
+    "scope",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Stable identifier of this WorkOrder record."
+    },
+    "strataCorporationId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "The strata corporation this record belongs to.",
+      "x-references": "StrataCorporation"
+    },
+    "maintenanceRequestIds": {
+      "type": "array",
+      "description": "Requests addressed by this work order.",
+      "items": {
+        "$ref": "urn:coos:schema:common#/$defs/Identifier",
+        "x-references": "MaintenanceRequest"
+      },
+      "uniqueItems": true
+    },
+    "contractorOrganizationId": {
+      "$ref": "urn:coos:schema:common#/$defs/Identifier",
+      "description": "Contractor carrying out the work.",
+      "x-references": "Organization"
+    },
+    "scope": {
+      "type": "string",
+      "description": "Description of the work.",
+      "maxLength": 5000
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status.",
+      "enum": [
+        "draft",
+        "issued",
+        "inProgress",
+        "completed",
+        "cancelled"
+      ],
+      "x-enumDescriptions": {
+        "draft": "Being prepared.",
+        "issued": "Sent to the contractor.",
+        "inProgress": "Work under way.",
+        "completed": "Work completed.",
+        "cancelled": "Cancelled."
+      }
+    },
+    "issuedDate": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "Date issued."
+    },
+    "completedDate": {
+      "$ref": "urn:coos:schema:common#/$defs/Date",
+      "description": "Date completed."
+    },
+    "estimatedCost": {
+      "$ref": "urn:coos:schema:common#/$defs/Money",
+      "description": "Estimated cost."
+    },
+    "actualCost": {
+      "$ref": "urn:coos:schema:common#/$defs/Money",
+      "description": "Actual cost."
+    },
+    "extensions": {
+      "$ref": "urn:coos:schema:common#/$defs/Extensions",
+      "description": "Implementation-specific data, namespaced by reverse domain."
+    }
+  }
+}

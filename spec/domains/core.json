@@ -1,0 +1,17 @@
+{
+  "id": "core",
+  "order": 1,
+  "name": "Core Strata Entities",
+  "summary": "The strata corporation, its plan, lots, buildings, common property, and the people and organizations involved.",
+  "purpose": "Define the stable backbone that every other domain refers to: which strata corporation a record belongs to, which strata lot it concerns, and which person or organization is involved.",
+  "inScope": ["Strata corporations and strata plans", "Strata lots, unit entitlement and parcel identifiers", "Buildings, common property and limited common property", "Civic units and addresses", "People, organizations and ownership interests"],
+  "outOfScope": ["Proof of title (the Land Title register remains authoritative)", "Tenancy agreements and rental details", "Sections of a strata corporation (open proposal)"],
+  "planned": [
+    { "name": "Section", "description": "A residential or non-residential section of a strata corporation with its own budget and bylaws." },
+    { "name": "Tenancy", "description": "Occupancy of a strata lot by a tenant, without exposing lease terms." }
+  ],
+  "openIssues": [
+    { "title": "Voting entitlement vs. unit entitlement", "description": "Decide whether voting entitlement needs a separate field on StrataLot." },
+    { "title": "Bare land and mixed plans", "description": "Confirm whether StrataPlan.planType needs more values." }
+  ]
+}
