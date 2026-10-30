@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Boxes, GitBranch, Network } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -95,49 +96,62 @@ export default function HomePage() {
       {/* Hero */}
       <section className="border-b bg-[linear-gradient(to_bottom,var(--color-muted),transparent)]">
         <div className="container-page py-16 sm:py-24">
-          <div className="max-w-3xl">
-            <div className="flex flex-wrap items-center gap-2">
-            <ProudlyCanadian />
-            <Link
-              href="/changelog"
-              className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 text-xs text-muted-foreground hover:text-foreground"
-            >
-              <span className="size-1.5 rounded-full bg-amber-500" aria-hidden="true" />
-              {standard.shortName} · early development · working draft v{manifest.version}
-            </Link>
-            </div>
-            <p className="mt-8 text-lg font-medium">
-              <BrandName className="font-bold tracking-tight" />
-              <span className="text-muted-foreground"> — {site.audience.charAt(0).toLowerCase() + site.audience.slice(1)}</span>
-            </p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">{standard.headline}.</h1>
-            <p className="mt-5 max-w-xl text-lg text-pretty text-muted-foreground">
-              The {standard.name} ({standard.shortName}) is an open, community-driven data standard that makes strata and
-              condominium information consistent, connected and interoperable — from strata corporations in British
-              Columbia to condominium corporations in Ontario, Alberta and across Canada.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg">
-                <Link href="/standard">
-                  Explore the Standard <ArrowRight data-icon="inline-end" />
+          <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+            <div>
+              <div className="flex flex-wrap items-center gap-2">
+                <ProudlyCanadian />
+                <Link
+                  href="/changelog"
+                  className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 text-xs text-muted-foreground hover:text-foreground"
+                >
+                  <span className="size-1.5 rounded-full bg-amber-500" aria-hidden="true" />
+                  {standard.shortName} · early development · working draft v{manifest.version}
                 </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                {site.links.specificationRepo ? (
-                  <a href={site.links.specificationRepo} rel="noopener">
-                    <GitHubMark className="size-4" /> Contribute on GitHub
-                  </a>
-                ) : (
-                  <Link href="/contribute">
-                    <GitHubMark className="size-4" /> Contribute on GitHub
+              </div>
+              <p className="mt-8 text-lg font-medium">
+                <BrandName className="font-bold tracking-tight" />
+                <span className="text-muted-foreground"> — {site.audience.charAt(0).toLowerCase() + site.audience.slice(1)}</span>
+              </p>
+              <h1 className="mt-3 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">{standard.headline}.</h1>
+              <p className="mt-5 max-w-xl text-lg text-pretty text-muted-foreground">
+                The {standard.name} ({standard.shortName}) is an open, community-driven data standard that makes strata and
+                condominium information consistent, connected and interoperable — from strata corporations in British
+                Columbia to condominium corporations in Ontario, Alberta and across Canada.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button asChild size="lg">
+                  <Link href="/standard">
+                    Explore the Standard <ArrowRight data-icon="inline-end" />
                   </Link>
-                )}
-              </Button>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  {site.links.specificationRepo ? (
+                    <a href={site.links.specificationRepo} rel="noopener">
+                      <GitHubMark className="size-4" /> Contribute on GitHub
+                    </a>
+                  ) : (
+                    <Link href="/contribute">
+                      <GitHubMark className="size-4" /> Contribute on GitHub
+                    </Link>
+                  )}
+                </Button>
+              </div>
+              <p className="mt-6 max-w-xl text-sm text-muted-foreground">
+                {standard.shortName} is maintained by {site.name}, an open initiative founded by {founder.name}. It is
+                industry infrastructure, not another property management product.
+              </p>
             </div>
-            <p className="mt-6 max-w-xl text-sm text-muted-foreground">
-              {standard.shortName} is maintained by {site.name}, an open initiative founded by {founder.name}. It is
-              industry infrastructure, not another property management product.
-            </p>
+            <div className="mx-auto w-full max-w-md lg:max-w-none">
+              <Image
+                src="/brand/opencoos-hero-art.svg"
+                alt="Pigeons carrying a data card between a strata mid-rise, a condo tower and townhouses"
+                width={600}
+                height={600}
+                priority
+                unoptimized
+                className="w-full rounded-2xl border shadow-xs"
+              />
+            </div>
           </div>
           <div className="mt-14">
             <EcosystemDiagram />
