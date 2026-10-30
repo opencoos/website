@@ -132,7 +132,7 @@ export default function GovernancePage() {
                 <strong>Early development (now):</strong> small maintainer group, open drafts, public feedback.
               </li>
               <li>
-                <strong>First release:</strong> contribution guide, code of conduct and documented
+                <strong>First release:</strong> code of conduct and documented
                 decision process.
               </li>
               <li>
