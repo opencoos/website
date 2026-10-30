@@ -1,8 +1,10 @@
-export const metadata = {
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata({
   title: "Conventions and naming",
-  description: "Data model and naming conventions for the Common Ownership Operating Schema: identifiers, casing, dates, money, addresses, enumerations and extensions.",
-  alternates: { canonical: "/docs/conventions" },
-};
+  description:
+    "Data model and naming conventions for the Common Ownership Operating Schema: identifiers, casing, dates, money, addresses, enumerations and extensions.",
+  path: "/docs/conventions",
+});
 
 # Conventions and naming
 

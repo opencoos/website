@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { BrandStack, brandLayers } from "@/components/site/brand-stack";
 import { Callout } from "@/components/site/callout";
 import { ProudlyCanadian } from "@/components/site/canada";
 import { PageHeader } from "@/components/site/page-header";
 import { founder, site, standard } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "About",
   description:
     "About COOS, the Common Ownership Operating Schema: why it exists, its mission and vision, and how its founder ManageStrata relates to the standard.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

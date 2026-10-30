@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import { ExternalLink } from "lucide-react";
 import { Callout } from "@/components/site/callout";
 import { PageHeader, Section } from "@/components/site/page-header";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contribute",
   description:
     "How developers, property managers, strata council members, industry professionals, researchers and software vendors can contribute to the strata data standard.",
-  alternates: { canonical: "/contribute" },
-};
+  path: "/contribute",
+});
 
 const pathways = [
   {

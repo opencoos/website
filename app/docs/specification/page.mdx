@@ -1,10 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
 import { SpecVersion } from "@/components/spec/spec-snippets";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Specification overview",
-  description: "Structure of the Common Ownership Operating Schema specification: domains, entities, shared definitions, statuses and the specification source repository.",
-  alternates: { canonical: "/docs/specification" },
-};
+  description:
+    "Structure of the Common Ownership Operating Schema specification: domains, entities, shared definitions, statuses and the specification source repository.",
+  path: "/docs/specification",
+});
 
 # Specification overview
 

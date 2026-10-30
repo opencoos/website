@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Callout } from "@/components/site/callout";
+import { pageMetadata } from "@/lib/seo";
 import { DomainIcon } from "@/components/site/domain-icon";
 import { StatusBadge } from "@/components/site/status-badge";
+import { Breadcrumbs } from "@/components/site/structured-data";
 import { getChangelog, getDomain, getDomains, getManifest } from "@/lib/spec/load";
 
 export function generateStaticParams() {
@@ -14,11 +16,12 @@ export async function generateMetadata({ params }: PageProps<"/standard/[domain]
   const { domain: id } = await params;
   const domain = getDomain(id);
   if (!domain) return {};
-  return {
+  return pageMetadata({
     title: `${domain.name} domain`,
     description: `${domain.summary} Draft entity definitions for Canadian strata and condominium data.`,
-    alternates: { canonical: `/standard/${domain.id}` },
-  };
+    path: `/standard/${domain.id}`,
+    type: "article",
+  });
 }
 
 const toc = [
@@ -52,6 +55,7 @@ export default async function DomainPage({ params }: PageProps<"/standard/[domai
         </nav>
       </aside>
 
+      <Breadcrumbs items={[{ name: "The Standard", path: "/standard" }, { name: domain.name, path: `/standard/${domain.id}` }]} />
       <article className="min-w-0 space-y-12">
         <header className="space-y-3">
           <Link href="/standard" className="text-sm text-muted-foreground hover:text-foreground">

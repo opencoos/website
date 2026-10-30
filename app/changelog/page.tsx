@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/site/page-header";
 import { getChangelog } from "@/lib/spec/load";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Changelog",
-  description: "Version history of the Common Ownership Operating Schema: releases, new entities, changes, deprecations, breaking changes and open proposals.",
-  alternates: { canonical: "/changelog" },
-};
+  description:
+    "Version history of the Common Ownership Operating Schema: releases, new entities, changes, deprecations, breaking changes and open proposals.",
+  path: "/changelog",
+});
 
 const groups = [
   ["added", "New entities and attributes"],

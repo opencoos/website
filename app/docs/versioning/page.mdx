@@ -1,8 +1,10 @@
-export const metadata = {
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata({
   title: "Versioning and compatibility",
-  description: "Versioning, backward compatibility and deprecation policy for the Common Ownership Operating Schema.",
-  alternates: { canonical: "/docs/versioning" },
-};
+  description:
+    "Versioning, backward compatibility and deprecation policy for the Common Ownership Operating Schema.",
+  path: "/docs/versioning",
+});
 
 # Versioning and compatibility
 

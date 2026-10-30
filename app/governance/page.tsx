@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Callout } from "@/components/site/callout";
 import { PageHeader } from "@/components/site/page-header";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Governance",
   description:
     "How the Common Ownership Operating Schema is maintained: contribution process, proposals, maintainers, versioning, deprecation, compatibility and conflict resolution.",
-  alternates: { canonical: "/governance" },
-};
+  path: "/governance",
+});
 
 const sections = [
   {

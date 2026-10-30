@@ -1,8 +1,10 @@
-export const metadata = {
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata({
   title: "Validation",
-  description: "Validate strata data against the draft JSON Schemas with any JSON Schema 2020-12 validator, with examples in TypeScript.",
-  alternates: { canonical: "/docs/validation" },
-};
+  description:
+    "Validate strata data against the draft JSON Schemas with any JSON Schema 2020-12 validator, with examples in TypeScript.",
+  path: "/docs/validation",
+});
 
 # Validation
 

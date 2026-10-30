@@ -1,19 +1,22 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Callout } from "@/components/site/callout";
 import { CrosswalkTable, JurisdictionGrid, ProudlyCanadian } from "@/components/site/canada";
 import { PageHeader, Section } from "@/components/site/page-header";
+import { Breadcrumbs, TerminologyLd } from "@/components/site/structured-data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Jurisdictions and terminology",
   description:
     "How the Common Ownership Operating Schema serves strata in British Columbia and condominiums in Ontario, Alberta and across Canada, with a terminology crosswalk.",
-  alternates: { canonical: "/standard/jurisdictions" },
-};
+  path: "/standard/jurisdictions",
+});
 
 export default function JurisdictionsPage() {
   return (
     <>
+      <TerminologyLd />
+      <Breadcrumbs items={[{ name: "The Standard", path: "/standard" }, { name: "Jurisdictions", path: "/standard/jurisdictions" }]} />
       <PageHeader eyebrow="Jurisdictions" title="One standard for strata and condo communities across Canada">
         BC calls them strata corporations; Ontario and Alberta call them condominium corporations. The concepts are largely
         shared — the words, documents and rules differ. COOS is designed to represent both.

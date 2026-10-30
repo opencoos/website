@@ -1,8 +1,10 @@
-export const metadata = {
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata({
   title: "Migration and mapping",
-  description: "How to map an existing strata data model to the Common Ownership Operating Schema and migrate data between platforms.",
-  alternates: { canonical: "/docs/mapping" },
-};
+  description:
+    "How to map an existing strata data model to the Common Ownership Operating Schema and migrate data between platforms.",
+  path: "/docs/mapping",
+});
 
 # Migration and mapping
 

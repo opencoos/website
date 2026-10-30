@@ -1,10 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
 import { SpecVersion, ExampleFor } from "@/components/spec/spec-snippets";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Getting started",
-  description: "Start implementing the Common Ownership Operating Schema: what it is, what exists today, and how to use the draft JSON Schemas for Canadian strata and condo data.",
-  alternates: { canonical: "/docs" },
-};
+  description:
+    "Start implementing the Common Ownership Operating Schema: what it is, what exists today, and how to use the draft JSON Schemas for Canadian strata and condo data.",
+  path: "/docs",
+});
 
 # Getting started
 

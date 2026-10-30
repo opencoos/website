@@ -1,18 +1,21 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/site/page-header";
+import { Breadcrumbs } from "@/components/site/structured-data";
 import { commonSchemaUrl, getSharedDefinitions } from "@/lib/spec/load";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Shared definitions",
-  description: "Reusable data types — identifiers, dates, money, addresses, strata plan numbers, PIDs and extensions — used across the draft strata data standard.",
-  alternates: { canonical: "/standard/shared-definitions" },
-};
+  description:
+    "Reusable data types — identifiers, dates, money, addresses, strata plan numbers, PIDs and extensions — used across the draft strata data standard.",
+  path: "/standard/shared-definitions",
+});
 
 export default function SharedDefinitionsPage() {
   const defs = getSharedDefinitions();
   return (
     <>
+      <Breadcrumbs items={[{ name: "The Standard", path: "/standard" }, { name: "Shared definitions", path: "/standard/shared-definitions" }]} />
       <PageHeader eyebrow="The Standard" title="Shared definitions">
         Reusable types referenced by every entity. They keep identifiers, dates, money and addresses consistent across the
         whole standard.

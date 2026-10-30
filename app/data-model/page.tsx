@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Callout } from "@/components/site/callout";
 import { PageHeader } from "@/components/site/page-header";
@@ -6,13 +5,14 @@ import { StatusLegend } from "@/components/site/status-badge";
 import { Explorer } from "@/components/spec/explorer";
 import { getDomains, getManifest } from "@/lib/spec/load";
 import { getEntityViews } from "@/lib/spec/views";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Data Model Explorer",
   description:
     "Browse the draft entities, fields, relationships and example payloads of the Common Ownership Operating Schema for Canadian strata and condominium data.",
-  alternates: { canonical: "/data-model" },
-};
+  path: "/data-model",
+});
 
 export default async function DataModelPage() {
   const { version } = getManifest();

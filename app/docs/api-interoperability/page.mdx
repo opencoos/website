@@ -1,8 +1,10 @@
-export const metadata = {
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata({
   title: "API interoperability",
-  description: "How the strata data standard relates to APIs and software products, and guidance for exchanging standard-shaped data over APIs and files.",
-  alternates: { canonical: "/docs/api-interoperability" },
-};
+  description:
+    "How the strata data standard relates to APIs and software products, and guidance for exchanging standard-shaped data over APIs and files.",
+  path: "/docs/api-interoperability",
+});
 
 # API interoperability
 

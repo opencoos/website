@@ -1,10 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
 import { RelationshipIndex } from "@/components/spec/spec-snippets";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Entity relationships",
-  description: "How entities in the draft strata data standard reference each other, generated from the JSON Schemas.",
-  alternates: { canonical: "/docs/relationships" },
-};
+  description:
+    "How entities in the draft strata data standard reference each other, generated from the JSON Schemas.",
+  path: "/docs/relationships",
+});
 
 # Entity relationships
 

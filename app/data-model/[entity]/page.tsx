@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { JsonLd } from "@/components/site/json-ld";
+import { pageMetadata } from "@/lib/seo";
 import { EntityDetail } from "@/components/spec/entity-detail";
+import { Breadcrumbs } from "@/components/site/structured-data";
 import { absoluteUrl, standard } from "@/lib/site";
 import { getEntities, getEntity, getManifest } from "@/lib/spec/load";
 import { getEntityView } from "@/lib/spec/views";
@@ -16,11 +18,12 @@ export async function generateMetadata({ params }: PageProps<"/data-model/[entit
   const { entity: name } = await params;
   const entity = getEntity(name);
   if (!entity) return {};
-  return {
+  return pageMetadata({
     title: `${entity.name} entity`,
     description: `${entity.description} Draft definition, fields, relationships and example JSON.`,
-    alternates: { canonical: `/data-model/${entity.name}` },
-  };
+    path: `/data-model/${entity.name}`,
+    type: "article",
+  });
 }
 
 export default async function EntityPage({ params }: PageProps<"/data-model/[entity]">) {
@@ -42,6 +45,7 @@ export default async function EntityPage({ params }: PageProps<"/data-model/[ent
           inLanguage: "en-CA",
         }}
       />
+      <Breadcrumbs items={[{ name: "Data Model", path: "/data-model" }, { name: entity.name, path: `/data-model/${entity.name}` }]} />
       <Link href={`/data-model?entity=${entity.name}`} className="mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="size-4" aria-hidden="true" /> Open in explorer
       </Link>

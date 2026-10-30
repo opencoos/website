@@ -1,10 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
 import { SchemaIndex, SchemaBaseUrl, SpecVersion } from "@/components/spec/spec-snippets";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "JSON Schema definitions",
-  description: "Download the machine-readable JSON Schema (2020-12) definitions and example payloads for the draft Canadian strata and condo data standard.",
-  alternates: { canonical: "/docs/json-schema" },
-};
+  description:
+    "Download the machine-readable JSON Schema (2020-12) definitions and example payloads for the draft Canadian strata and condo data standard.",
+  path: "/docs/json-schema",
+});
 
 # JSON Schema definitions
 

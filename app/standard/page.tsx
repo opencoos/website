@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Callout } from "@/components/site/callout";
@@ -6,14 +5,16 @@ import { DomainIcon } from "@/components/site/domain-icon";
 import { PageHeader, Section } from "@/components/site/page-header";
 import { StatusBadge, StatusLegend } from "@/components/site/status-badge";
 import { standard } from "@/lib/site";
+import { Breadcrumbs, DatasetLd, KeyFacts } from "@/components/site/structured-data";
 import { getDomains, getManifest } from "@/lib/spec/load";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "The Standard",
   description:
     "Scope, terminology, design principles, versioning and proposed domains of the Common Ownership Operating Schema, an open data model for strata and condominium corporations across Canada.",
-  alternates: { canonical: "/standard" },
-};
+  path: "/standard",
+});
 
 const principles = [
   ["Open by default", "Public specifications, transparent documentation and an open development process."],
@@ -47,7 +48,11 @@ export default function StandardPage() {
         exchanged consistently across software platforms and industry initiatives.
       </PageHeader>
 
+      <DatasetLd />
+      <Breadcrumbs items={[{ name: "The Standard", path: "/standard" }]} />
       <div className="container-page pt-10">
+        <h2 className="sr-only">Key facts</h2>
+        <KeyFacts className="mb-8 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3" />
         <Callout tone="warning" title={`Working draft v${manifest.version} — not yet released`}>
           The domains below are proposed. Entities marked Proposed or Experimental have draft schemas that may change; entities
           marked Planned have no schema yet. Provincial legal terminology is used carefully and flagged for review before it becomes

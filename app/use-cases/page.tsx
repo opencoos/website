@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Callout } from "@/components/site/callout";
 import { PageHeader } from "@/components/site/page-header";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Use cases",
   description:
     "How a shared strata data standard is intended to help: moving data between platforms, connecting maintenance systems, normalising financial reporting and more.",
-  alternates: { canonical: "/use-cases" },
-};
+  path: "/use-cases",
+});
 
 const useCases = [
   {

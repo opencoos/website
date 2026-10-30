@@ -10,12 +10,22 @@ import { DomainIcon } from "@/components/site/domain-icon";
 import { EcosystemDiagram } from "@/components/site/ecosystem-diagram";
 import { BrandName, GitHubMark } from "@/components/site/icons";
 import { JsonLd } from "@/components/site/json-ld";
+import { KeyFacts, organizationLd } from "@/components/site/structured-data";
 import { Section } from "@/components/site/page-header";
 import { StatusBadge } from "@/components/site/status-badge";
 import { faq } from "@/lib/content/faq";
 import { implementations } from "@/lib/content/implementations";
+import { pageMetadata } from "@/lib/seo";
 import { absoluteUrl, founder, site, standard } from "@/lib/site";
 import { getChangelog, getDomains, getEntities, getManifest } from "@/lib/spec/load";
+
+export const metadata = pageMetadata({
+  title: `${site.name} — COOS, the open data standard for Canadian strata and condos`,
+  description:
+    "COOS (Common Ownership Operating Schema) is an open, vendor-neutral data model for strata corporations in BC and condominium corporations in Ontario, Alberta and across Canada. Free to use under Apache-2.0.",
+  path: "/",
+  absoluteTitle: true,
+});
 
 const problems = [
   "The same strata concepts are represented differently across software platforms.",
@@ -78,13 +88,7 @@ export default function HomePage() {
           "@context": "https://schema.org",
           "@graph": [
             { "@type": "WebSite", name: site.name, url: absoluteUrl("/"), description: site.description, inLanguage: "en-CA" },
-            {
-              "@type": "Organization",
-              name: site.name,
-              url: absoluteUrl("/"),
-              description: site.tagline,
-              founder: { "@type": "Organization", name: founder.name, url: founder.url },
-            },
+            organizationLd(),
             {
               "@type": "FAQPage",
               mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
@@ -156,6 +160,16 @@ export default function HomePage() {
           <div className="mt-14">
             <EcosystemDiagram />
           </div>
+        </div>
+      </section>
+
+      {/* At a glance */}
+      <section aria-labelledby="glance-title" className="border-b">
+        <div className="container-page py-10">
+          <h2 id="glance-title" className="eyebrow">
+            {standard.shortName} at a glance
+          </h2>
+          <KeyFacts className="mt-5 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3" />
         </div>
       </section>
 

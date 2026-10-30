@@ -1,10 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
 import { ExampleFor } from "@/components/spec/spec-snippets";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Implementation examples",
-  description: "Worked examples and adoption guidance for implementing the draft Canadian strata and condo data standard in your product.",
-  alternates: { canonical: "/docs/implementation" },
-};
+  description:
+    "Worked examples and adoption guidance for implementing the draft Canadian strata and condo data standard in your product.",
+  path: "/docs/implementation",
+});
 
 # Implementation examples
 
