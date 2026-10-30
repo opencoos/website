@@ -1,0 +1,80 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- Source for public/brand/opencoos-hero.png. Render with headless Chrome at 1280x640:
+     chrome --headless=new --window-size=1280,640 --force-device-scale-factor=1 --screenshot=opencoos-hero.png design/hero.html --><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=block" rel="stylesheet">
+<style>
+  html,body{margin:0;width:1280px;height:640px;overflow:hidden}
+  body{font-family:"IBM Plex Sans",sans-serif;color:#0f172a;position:relative;
+    background:#f0fdfa;
+    background-image:linear-gradient(#ccfbf1 1px,transparent 1px),linear-gradient(90deg,#ccfbf1 1px,transparent 1px);
+    background-size:32px 32px}
+  .copy{position:absolute;left:80px;top:104px;width:600px}
+  .word{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:56px;letter-spacing:-1.5px;display:flex;align-items:center;gap:18px}
+  .word span{color:#0f766e}
+  h1{text-wrap:balance;font-size:40px;line-height:1.15;font-weight:600;letter-spacing:-0.8px;margin:28px 0 0}
+  p{font-size:20px;line-height:1.5;color:#475569;margin:18px 0 0}
+  .pills{display:flex;gap:10px;margin-top:30px}
+  .pill{font-size:15px;font-weight:500;border-radius:999px;padding:6px 14px;border:1px solid #99f6e4;background:#fff;color:#115e59}
+  .pill.red{border-color:#fecaca;background:#fef2f2;color:#991b1b}
+  code{font-family:"IBM Plex Mono",monospace}
+  svg.art{position:absolute;right:0;top:0}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="pigeon" viewBox="0 0 32 32">
+      <path d="M10 17.5 L2.5 14.2 C2 14 1.7 14.6 2.1 15 L7.5 20.5 Z" fill="#115e59"/>
+      <path d="M7 18.5 C7 13.2 11.5 10.6 16.5 11.2 L19.5 11.8 C24.6 13 27 17.8 25.2 22.2 C23.5 26.2 18 27.6 13.5 26.3 C9.6 25.2 7 22.4 7 18.5 Z" fill="#0f766e"/>
+      <path d="M18.6 12.8 C20.4 14.3 23.6 14 25.4 11.9 C25.6 14.6 22.8 16.1 20.4 15.6 C19.5 15.4 18.9 14.4 18.6 12.8 Z" fill="#14b8a6"/>
+      <circle cx="21.8" cy="9.4" r="4.4" fill="#0f766e"/>
+      <path d="M25.9 8.6 L29.3 9.8 L25.9 11 Z" fill="#f59e0b"/>
+      <circle cx="22.9" cy="8.5" r="1.55" fill="#fff"/><circle cx="23.3" cy="8.5" r="0.8" fill="#0f172a"/>
+      <path d="M12.6 15 c1.9 0 2.4 0.7 2.4 2 v1.1 c0 1 0.5 1.5 1.7 1.5 c-1.2 0 -1.7 0.5 -1.7 1.5 v1.1 c0 1.3 -0.5 2 -2.4 2" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M15 26.6 v2.6 M19.2 26.2 v3" stroke="#f59e0b" stroke-width="1.4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="pigeon-fly" viewBox="0 0 32 32" overflow="visible">
+      <path d="M11 14 C10 7.5 13.5 2.5 19.5 0.5 C18.4 5 18.6 9.4 20 12.4 Z" fill="#115e59"/>
+      <use href="#pigeon" x="0" y="0" width="32" height="32"/>
+    </symbol>
+    <pattern id="win" width="28" height="30" patternUnits="userSpaceOnUse"><rect x="7" y="8" width="14" height="16" rx="2" fill="#ccfbf1"/></pattern>
+    <pattern id="win2" width="26" height="28" patternUnits="userSpaceOnUse"><rect x="6" y="7" width="14" height="14" rx="2" fill="#99f6e4"/></pattern>
+  </defs>
+</svg>
+
+<div style="position:absolute;left:0;right:0;bottom:0;height:80px;background:#ccfbf1;border-top:2px solid #99f6e4"></div>
+<div class="copy">
+  <div class="word"><svg width="64" height="64"><use href="#pigeon"/></svg><div>Open<span>COOS</span></div></div>
+  <h1>A common language for Canada's strata and condo data.</h1>
+  <p><strong style="color:#0f172a;font-weight:600">COOS</strong> — the Common Ownership Operating Schema. An open, vendor-neutral data model, from BC strata to Ontario and Alberta condos.</p>
+  <div class="pills"><span class="pill red">🍁 Proudly Canadian</span><span class="pill"><code>v0.1.0-draft</code></span><span class="pill">Apache-2.0</span></div>
+</div>
+
+<svg class="art" width="620" height="640" viewBox="0 0 620 640">
+  <!-- ground -->
+  <!-- condo tower -->
+  <rect x="300" y="170" width="168" height="390" rx="6" fill="#115e59"/>
+  <rect x="300" y="170" width="168" height="390" rx="6" fill="url(#win)" transform="translate(0,6)"/>
+  <rect x="290" y="160" width="188" height="16" rx="4" fill="#0f766e"/>
+  <!-- strata mid-rise -->
+  <rect x="96" y="330" width="176" height="230" rx="6" fill="#0f766e"/>
+  <rect x="96" y="336" width="176" height="224" fill="url(#win2)"/>
+  <path d="M84 334 L184 280 L284 334 Z" fill="#115e59"/>
+  <!-- townhouses -->
+  <rect x="488" y="420" width="118" height="140" rx="4" fill="#14b8a6"/>
+  <path d="M480 424 L517 384 L554 424 Z M540 424 L577 384 L614 424 Z" fill="#0f766e"/>
+  <rect x="506" y="470" width="22" height="30" rx="2" fill="#f0fdfa"/><rect x="566" y="470" width="22" height="30" rx="2" fill="#f0fdfa"/>
+  <rect x="512" y="522" width="16" height="38" rx="2" fill="#115e59"/><rect x="572" y="522" width="16" height="38" rx="2" fill="#115e59"/>
+  <!-- data route between buildings -->
+  <path d="M190 270 C230 150 330 90 384 150" fill="none" stroke="#0f766e" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+  <path d="M384 150 C420 70 540 70 560 210 C570 300 560 340 548 372" fill="none" stroke="#0f766e" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+  <!-- pigeon on the tower roof -->
+  <use href="#pigeon" x="338" y="66" width="96" height="96"/>
+  <!-- pigeon on the mid-rise roof -->
+  <use href="#pigeon" x="150" y="214" width="72" height="72"/>
+  <!-- flying pigeon carrying a data card -->
+  <g transform="translate(482 92) rotate(-6)">
+    <path d="M44 56 L40 82" stroke="#0f766e" stroke-width="2"/>
+    <rect x="8" y="80" width="66" height="44" rx="6" fill="#fff" stroke="#0f766e" stroke-width="2.5"/>
+    <text x="41" y="110" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="22" fill="#0f766e">{ }</text>
+    <use href="#pigeon-fly" x="0" y="0" width="76" height="76"/>
+  </g>
+</svg>
+</body></html>

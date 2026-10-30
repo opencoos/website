@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { founder, site, standard } from "@/lib/site";
+import { site, standard } from "@/lib/site";
 import { getManifest } from "@/lib/spec/load";
 import { ProudlyCanadian } from "./canada";
 import { BrandName, LogoMark } from "./icons";
@@ -47,13 +47,6 @@ export function SiteFooter() {
           </Link>
           <p className="max-w-sm text-sm text-muted-foreground">
             Maintainers of the {standard.name} ({standard.shortName}). {site.tagline}. Currently in early development (working draft v{version}).
-          </p>
-          <p className="text-sm text-muted-foreground">
-            An initiative founded by{" "}
-            <a href={founder.url} rel="noopener" className="text-foreground hover:text-primary">
-              {founder.name}
-            </a>
-            .
           </p>
           <ProudlyCanadian />
         </div>
