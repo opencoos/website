@@ -47,3 +47,7 @@ npm run lint
 ## Configuration
 
 Copy `.env.example` to `.env.local`. External links (repository, issues, discussions, contribution guide, contact email) are unset by default and shown as "Pending configuration" until set. `SPEC_DIR` points the site at a separately checked-out specification repository.
+
+## Licence
+
+Licensed under the [Apache License, Version 2.0](LICENSE), as is the specification in [opencoos/spec](https://github.com/opencoos/spec). Copyright The OpenCOOS Authors. The names "COOS" and "OpenCOOS" and the logo are not covered by the licence (see [NOTICE](NOTICE)).

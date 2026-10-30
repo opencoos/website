@@ -75,7 +75,11 @@ export function SiteFooter() {
       <div className="border-t">
         <p className="container-page py-6 text-xs leading-relaxed text-muted-foreground">
           OpenCOOS is an open community initiative founded by ManageStrata. It is not endorsed by, affiliated with, or mandated by the Government
-          of Canada, any province or territory, or any regulator. Data modelling guidance on this site is not legal advice.
+          of Canada, any province or territory, or any regulator. Data modelling guidance on this site is not legal advice. COOS and this website are licensed under the{" "}
+          <a href="https://github.com/opencoos/spec/blob/main/LICENSE" rel="noopener" className="underline underline-offset-2 hover:text-foreground">
+            Apache License 2.0
+          </a>
+          .
         </p>
       </div>
     </footer>

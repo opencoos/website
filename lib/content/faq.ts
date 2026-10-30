@@ -32,6 +32,10 @@ export const faq = [
     a: "ManageStrata founded the OpenCOOS initiative, helps initiate the standard, and plans to adopt COOS as the foundation of its own data model. The standard is designed so that adopting it never requires using ManageStrata, and competing products are equally welcome to implement and shape it.",
   },
   {
+    q: "Can my company use COOS in a commercial product?",
+    a: "Yes. COOS is licensed under the Apache License 2.0, so property management companies and software vendors can use, modify and embed it in commercial products without opening their own code. The licence includes a patent grant from contributors. Adopting COOS never requires using ManageStrata or any other product.",
+  },
+  {
     q: "Will my strata's data be published?",
     a: "No. The standard defines the shape of data, not the data itself. It does not collect, host or publish any strata corporation's records, and it is designed so that private or sensitive information never needs to be made public.",
   },

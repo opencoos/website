@@ -2,6 +2,7 @@
   "name": "opencoos-website",
   "version": "0.1.0",
   "private": true,
+  "license": "Apache-2.0",
   "scripts": {
     "dev": "npm run spec:publish && next dev",
     "build": "npm run spec:validate && npm run spec:publish && next build",
